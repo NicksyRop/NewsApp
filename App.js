@@ -1,4 +1,6 @@
+import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
+
 import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -15,11 +17,15 @@ import Health from "./screens/Health";
 import Sports from "./screens/Sports";
 import Tech from "./screens/Tech";
 
+//stacks
+import { RootStackNav } from "./navigators/RootStackNav";
+
 export default function App() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <Tab.Navigator initialRouteName="All">
+        <RootStackNav />
+        {/* <Tab.Navigator initialRouteName="All">
           <Tab.Screen
             name="All"
             component={All}
@@ -104,7 +110,7 @@ export default function App() {
               ),
             }}
           />
-        </Tab.Navigator>
+        </Tab.Navigator> */}
       </NativeBaseProvider>
     </NavigationContainer>
   );
