@@ -19,7 +19,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <Tab.Navigator>
+        <Tab.Navigator initialRouteName="All">
           <Tab.Screen
             name="All"
             component={All}
