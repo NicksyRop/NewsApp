@@ -29,28 +29,37 @@ const Health = () => {
   return (
     <Box>
       <ScrollView h="850">
-        <FlatList
-          data={allNews}
-          renderItem={({ item }) => (
-            <Box p="5">
-              <View>
-                <Image
-                  source={{ uri: item.urlToImage }}
-                  resizeMode="cover"
-                  alt="Photo image"
-                  width="100%"
-                  height={250}
-                />
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.date}>
-                  {moment(item.publishedAt).format("LLL")}
-                </Text>
-                <Text style={styles.descripion}>{item.description}</Text>
-              </View>
-            </Box>
-          )}
-          keyExtractor={(item) => item.id}
-        />
+        {allNews.length > 1 ? (
+          <FlatList
+            data={allNews}
+            renderItem={({ item }) => (
+              <Box p="5">
+                <View>
+                  <Image
+                    source={{ uri: item.urlToImage }}
+                    resizeMode="cover"
+                    alt="Photo image"
+                    width="100%"
+                    height={250}
+                  />
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.date}>
+                    {moment(item.publishedAt).format("LLL")}
+                  </Text>
+                  <Text style={styles.descripion}>{item.description}</Text>
+                </View>
+              </Box>
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        ) : (
+          <HStack space={2} alignItems="center">
+            <Spinner accessibilityLabel="Loading posts" />
+            <Heading color="primary.500" fontSize="md">
+              Loading
+            </Heading>
+          </HStack>
+        )}
       </ScrollView>
     </Box>
   );
