@@ -31,11 +31,11 @@ const All = () => {
         <FlatList
           data={allNews}
           renderItem={({ item }) => (
-            <Box p="2.5">
+            <Box p="6">
               <View>
-                <Text>{item.title}</Text>
-                <Text>{item.publishedAt}</Text>
-                <Text>{item.description}</Text>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.date}>{item.publishedAt}</Text>
+                <Text style={styles.descripion}>{item.description}</Text>
               </View>
             </Box>
           )}
@@ -46,6 +46,18 @@ const All = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  descripion: {
+    fontSize: 14,
+    marginTop: 10,
+  },
+  date: {
+    fontSize: 14,
+  },
+});
 
 export default All;
