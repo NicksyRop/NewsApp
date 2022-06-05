@@ -22,7 +22,6 @@ const Splash = ({ navigation }) => {
           resizeMode="contain"
           borderRadius={100}
           animation="bounceIn"
-          duration="1500"
         />
       </View>
       <Animatable.View style={styles.footer} animation="fadeInUpBig">
