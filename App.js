@@ -5,6 +5,8 @@ import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NativeBaseProvider, Text, Box } from "native-base";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 const Tab = createBottomTabNavigator();
 import Icon from "react-native-vector-icons/Feather";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -24,7 +26,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <RootStackNav />
+        <SafeAreaProvider>
+          <RootStackNav />
+        </SafeAreaProvider>
+
         {/* <Tab.Navigator initialRouteName="All">
           <Tab.Screen
             name="All"
