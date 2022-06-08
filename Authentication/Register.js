@@ -11,6 +11,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
 import { LinearGradient } from "expo-linear-gradient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Register = ({ navigation }) => {
   const [data, setData] = useState({
@@ -21,6 +22,8 @@ const Register = ({ navigation }) => {
     confirm_secureTextEntry: true,
     check_textInputChange: false,
   });
+
+  const [emailError, setEmailError] = useState("");
 
   const textInputChange = (val) => {
     if (val.length !== 0) {
@@ -67,6 +70,45 @@ const Register = ({ navigation }) => {
       confirm_secureTextEntry: !data.confirm_secureTextEntry,
     });
   };
+
+  const Register = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      name: "Nicksykkk",
+      email: data.email,
+      password: data.password,
+      password_confirmation: data.confirm_password,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://cryptic-fjord-14730.herokuapp.com/api/auth/register",
+      requestOptions
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.message != undefined) {
+          console.log(raw);
+          navigation.navigate("Login");
+        } else {
+          alert(res.email[0]);
+        }
+      })
+      .catch((error) => console.log("error", error));
+
+    // let data2 = JSON.stringify(data);
+    // await AsyncStorage.setItem("user", data2);
+    // navigation.replace("Login");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -129,7 +171,9 @@ const Register = ({ navigation }) => {
             colors={["#4c669f", "#76a2e8", "#192f6a"]}
             style={styles.LinearGradient}
           >
-            <Text style={styles.textSingin}>Sign Up</Text>
+            <Text onPress={Register} style={styles.textSingin}>
+              Sign Up
+            </Text>
           </LinearGradient>
         </View>
         <TouchableOpacity

@@ -11,6 +11,9 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
 import { LinearGradient } from "expo-linear-gradient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { AuthenticationContext } from "../context/AuthenticationContext";
 
 const Login = ({ navigation }) => {
   const [data, setData] = useState({
@@ -43,6 +46,40 @@ const Login = ({ navigation }) => {
       ...data,
       password: val,
     });
+  };
+
+  const signIn = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      email: data.email,
+      password: data.password,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://cryptic-fjord-14730.herokuapp.com/api/auth/login",
+      requestOptions
+    )
+      .then((res) => res.json())
+      .then(async (res) => {
+        if (res.access_token != undefined) {
+          await AsyncStorage.setItem("token", res.access_token);
+          let userinfo = JSON.stringify(res.user);
+          await AsyncStorage.setItem("user", userinfo);
+          navigation.replace("Main");
+        } else {
+          console.log(res);
+        }
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const updateSecureTextEntry = () => {
@@ -95,7 +132,9 @@ const Login = ({ navigation }) => {
             colors={["#4c669f", "#76a2e8", "#192f6a"]}
             style={styles.LinearGradient}
           >
-            <Text style={styles.textSingin}>Sign In</Text>
+            <Text onPress={signIn} style={styles.textSingin}>
+              Sign In
+            </Text>
           </LinearGradient>
         </View>
         <TouchableOpacity
