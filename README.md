@@ -10,7 +10,7 @@ NewsApp is a cross platform mobile application for getting real time news on spo
 It is built using react navtive and is expo based.JWT is used for authentication and Aysnc storage for persistatance.
 
 ## Demo
-Demo can be viewed.[here] (https://www.loom.com/share/1acc78c0ccc849519734e5fb1ee47fe5)
+Demo can be viewed.[here](https://res.cloudinary.com/kenya-power/video/upload/v1656065509/online-shop/Screenrecorder-2022-06-24-12-42-31-853_xwsqor.mp4)
 
 ## Screenshots: 📷
 
