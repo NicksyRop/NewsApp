@@ -76,10 +76,10 @@ const Register = ({ navigation }) => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      name: "Nicksykkk",
+      username: "Nicksy",
       email: data.email,
       password: data.password,
-      password_confirmation: data.confirm_password,
+      confirm_password: data.confirm_password,
     });
 
     var requestOptions = {
@@ -90,23 +90,14 @@ const Register = ({ navigation }) => {
     };
 
     fetch(
-      "https://cryptic-fjord-14730.herokuapp.com/api/auth/register",
+      "https://jwt-node-api-nicksy.herokuapp.com/api/users/register",
       requestOptions
     )
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.message != undefined) {
-          console.log(raw);
-          navigation.navigate("Login");
-        } else {
-          alert(res.email[0]);
-        }
+      .then((response) => response.json())
+      .then((result) => {
+        navigation.replace("Login");
       })
       .catch((error) => console.log("error", error));
-
-    // let data2 = JSON.stringify(data);
-    // await AsyncStorage.setItem("user", data2);
-    // navigation.replace("Login");
   };
 
   return (

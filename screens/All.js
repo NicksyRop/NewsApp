@@ -52,7 +52,7 @@ const All = () => {
               </View>
             </Box>
           )}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.urlToImage}
         />
       ) : (
         <Box space={2} flex={1} alignItems="center" justifyContent="center">

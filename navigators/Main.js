@@ -9,6 +9,7 @@ import Bussiness from "../screens/Bussiness";
 import Health from "../screens/Health";
 import Sports from "../screens/Sports";
 import Tech from "../screens/Tech";
+
 const Tab = createBottomTabNavigator();
 
 export default function Main() {

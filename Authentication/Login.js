@@ -47,6 +47,14 @@ const Login = ({ navigation }) => {
       password: val,
     });
   };
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("user", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const signIn = () => {
     var myHeaders = new Headers();
@@ -65,22 +73,52 @@ const Login = ({ navigation }) => {
     };
 
     fetch(
-      "https://cryptic-fjord-14730.herokuapp.com/api/auth/login",
+      "https://jwt-node-api-nicksy.herokuapp.com/api/users/login",
       requestOptions
     )
-      .then((res) => res.json())
-      .then(async (res) => {
-        if (res.access_token != undefined) {
-          await AsyncStorage.setItem("token", res.access_token);
-          let userinfo = JSON.stringify(res.user);
-          await AsyncStorage.setItem("user", userinfo);
-          navigation.replace("Main");
-        } else {
-          console.log(res);
-        }
+      .then((response) => response.text())
+      .then((result) => {
+        storeData(result);
+
+        navigation.navigate("Main");
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log(error));
   };
+
+  // const signIn = () => {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Accept", "application/json, text/plain");
+  //   myHeaders.append("Content-Type", "application/json");
+
+  //   var raw = JSON.stringify({
+  //     email: data.email,
+  //     password: data.password,
+  //   });
+
+  //   var requestOptions = {
+  //     method: "POST",
+  //     headers: myHeaders,
+  //     body: raw,
+  //     redirect: "follow",
+  //   };
+
+  //   fetch(
+  //     "https://cryptic-fjord-14730.herokuapp.com/api/auth/login",
+  //     requestOptions
+  //   )
+  //     .then((res) => res.text())
+  //     .then(async (res) => {
+  //       if (res.access_token != undefined) {
+  //         await AsyncStorage.setItem("token", res.access_token);
+  //         let userinfo = JSON.stringify(res.user);
+  //         await AsyncStorage.setItem("user", userinfo);
+  //         navigation.replace("Main");
+  //       } else {
+  //         console.log(res);
+  //       }
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // };
 
   const updateSecureTextEntry = () => {
     setData({
