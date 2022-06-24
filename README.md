@@ -3,7 +3,7 @@
 NewsApp
 
 ## Live Link
-Access the application  [here](https://react-online-shop.herokuapp.com/)
+Access the application  [here](https://expo.dev/artifacts/f43ccaaf-a9d8-41e4-a657-a8b074e65e8c)
 
 ## About the Project
 NewsApp is a cross platform mobile application for getting real time news on sports , bussiness , health and Technololgy.You  are required to register for an account so as to get access to news feeds.
